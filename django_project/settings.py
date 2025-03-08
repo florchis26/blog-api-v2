@@ -39,7 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'posts',
+    # 3rd party apps
     'corsheaders',
+    'django.contrib.sites',         # new
+    'allauth',                      # new
+    'allauth.account',              # new
+    'allauth.socialaccount',        # new
+    'dj_rest_auth',                 # new
+    'dj_rest_auth.registration',    # new
+    'rest_framework.authtoken',     # new
 ]
 
 REST_FRAMEWORK = {
@@ -56,8 +64,19 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'allauth.account.middleware.AccountMiddleware',                 # new
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# django-allauth settings
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
